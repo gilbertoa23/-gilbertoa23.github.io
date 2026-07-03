@@ -4,139 +4,424 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¡Gran Premio de Cumpleaños! 🏎️🔥</title>
+    <!-- Tailwind CSS para el diseño -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Orbitron:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Fuentes Temáticas -->
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Orbitron:wght@700;900&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Iconos FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
         .font-racing { font-family: 'Permanent Marker', cursive; }
         .font-timer { font-family: 'Orbitron', sans-serif; }
-        body { font-family: 'Montserrat', sans-serif; }
-        
-        /* Animación de luces de carrera */
-        @keyframes pulse-fast {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
+        body { 
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0f0f12;
         }
-        .pulse-orange { animation: pulse-fast 1.5s infinite; }
+        
+        /* Fondo estilo asfalto/textura de carreras */
+        .asphalt-bg {
+            background-color: #121214;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(249, 115, 22, 0.15) 0%, transparent 80%),
+                linear-gradient(45deg, #18181b 25%, transparent 25%, transparent 75%, #18181b 75%, #18181b),
+                linear-gradient(45deg, #18181b 25%, #121214 25%, #121214 75%, #18181b 75%, #18181b);
+            background-size: 100% 100%, 40px 40px, 40px 40px;
+            background-position: center, 0 0, 20px 20px;
+        }
+
+        /* Bandera de cuadros usando CSS */
+        .checkered-pattern {
+            background-image: linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000), 
+                              linear-gradient(45deg, #000 25%, #fff 25%, #fff 75%, #000 75%, #000);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+        }
+
+        /* Animaciones personalizadas */
+        .speed-glow {
+            box-shadow: 0 0 25px rgba(249, 115, 22, 0.6);
+        }
+
+        /* Efecto de inclinación estilo Hot Wheels */
+        .hw-skew {
+            transform: skewX(-6deg);
+        }
+
+        /* Transiciones de pantallas */
+        .screen {
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .screen-hidden {
+            opacity: 0;
+            transform: scale(0.95) translateY(50px);
+            pointer-events: none;
+            position: absolute;
+            width: 100%;
+            height: 0;
+            overflow: hidden;
+        }
+
+        /* Tarjeta de fotos flotante */
+        .photo-card {
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .photo-card:hover {
+            transform: rotate(-2deg) scale(1.05);
+            box-shadow: 0 15px 30px rgba(239, 68, 68, 0.4);
+        }
     </style>
 </head>
-<body class="bg-zinc-900 text-white min-h-screen flex flex-col justify-between overflow-x-hidden">
+<body class="asphalt-bg text-white min-h-screen flex flex-col justify-between overflow-x-hidden">
 
-    <div class="h-4 bg-white w-full" style="background-image: linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000), linear-gradient(45deg, #000 25%, #fff 25%, #fff 75%, #000 75%, #000); background-size: 20px 20px; background-position: 0 0, 10px 10px;"></div>
+    <!-- CABECERA DE PISTA (Bandera de cuadros superior) -->
+    <div class="h-5 checkered-pattern w-full border-b-2 border-orange-500 shadow-md z-50"></div>
 
-    <main class="container mx-auto px-4 py-8 max-w-xl text-center flex-grow flex flex-col justify-center items-center">
+    <!-- CONTENEDOR MULTIPANTALLA -->
+    <div class="flex-grow flex items-center justify-center py-6 px-4 relative w-full max-w-4xl mx-auto">
         
-        <div class="mb-6 transform -rotate-2">
-            <span class="block text-amber-400 text-2xl font-bold uppercase tracking-widest drop-shadow-md">¡Estás invitado al!</span>
-            <h1 class="font-racing text-5xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-b from-yellow-400 via-orange-500 to-red-600 drop-shadow-[0_4px_8px_rgba(239,68,68,0.6)] py-2">
-                GRAN PREMIO
-            </h1>
-            <p class="text-3xl font-black italic text-white bg-red-600 inline-block px-6 py-1 rounded-lg shadow-lg uppercase tracking-wider mt-2 border-2 border-yellow-400">
-                ¡Cumpleaños Nº 2! 🎉
+        <!-- ================= PANTALLA 1: INICIAR CARRERA ================= -->
+        <section id="screen-1" class="screen w-full max-w-md flex flex-col items-center text-center">
+            
+            <!-- Logo Hot Wheels Style -->
+            <div class="relative mb-8 transform -rotate-3 animate-bounce">
+                <span class="block text-yellow-400 font-black tracking-widest text-lg uppercase">¡La pista está lista!</span>
+                <h1 class="font-racing text-6xl md:text-7xl text-transparent bg-clip-text bg-gradient-to-b from-yellow-300 via-orange-500 to-red-600 drop-shadow-[0_5px_10px_rgba(239,68,68,0.7)] py-2">
+                    HOT WHEELS
+                </h1>
+                <div class="bg-red-600 text-white font-black italic px-4 py-1.5 rounded border-2 border-yellow-400 inline-block uppercase text-2xl tracking-wider hw-skew shadow-lg mt-1">
+                    CUMPLE DE CHRISTOPHER 🎉
+                </div>
+            </div>
+
+            <p class="text-gray-300 text-lg mb-8 max-w-xs leading-relaxed font-semibold">
+                ¿Estás listo para correr a toda velocidad? Enciende tus motores para ver la invitación oficial.
             </p>
-        </div>
 
-        <p class="text-gray-300 text-lg mb-8 max-w-sm font-medium">
-            Enciende tus motores y prepárate para la carrera más divertida del año. ¡No te quedes en los pits!
-        </p>
-
-        <div class="bg-zinc-800/90 border-2 border-orange-500 rounded-2xl p-6 w-full shadow-[0_0_20px_rgba(249,115,22,0.3)] mb-8">
-            <h3 class="text-orange-500 font-bold uppercase tracking-wider text-sm mb-3 pulse-orange">⏱️ Tiempo para el banderazo de salida</h3>
-            <div class="grid grid-cols-4 gap-2 font-timer text-2xl md:text-3xl text-yellow-400">
-                <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-700">
-                    <span id="days">00</span>
-                    <p class="text-[10px] font-sans uppercase tracking-normal text-gray-400 mt-1">Días</p>
-                </div>
-                <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-700">
-                    <span id="hours">00</span>
-                    <p class="text-[10px] font-sans uppercase tracking-normal text-gray-400 mt-1">Horas</p>
-                </div>
-                <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-700">
-                    <span id="minutes">00</span>
-                    <p class="text-[10px] font-sans uppercase tracking-normal text-gray-400 mt-1">Min</p>
-                </div>
-                <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-700">
-                    <span id="seconds">00</span>
-                    <p class="text-[10px] font-sans uppercase tracking-normal text-gray-400 mt-1">Seg</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="w-full space-y-4 mb-8 text-left">
-            <div class="flex items-center bg-zinc-800/50 p-4 rounded-xl border-l-4 border-yellow-500">
-                <span class="text-3xl mr-4">📅</span>
-                <div>
-                    <h4 class="font-bold text-yellow-500 text-sm uppercase">Fecha del Evento</h4>
-                    <p class="text-gray-200 font-semibold">Sábado, 15 de Agosto de 2026</p>
-                </div>
+            <!-- Semáforo de Salida Interactivo -->
+            <div class="bg-zinc-950 border-4 border-zinc-700 rounded-3xl p-4 flex flex-col gap-4 mb-8 shadow-inner w-32 items-center">
+                <div id="light-red" class="w-12 h-12 rounded-full bg-red-900 border-2 border-red-950 transition-colors duration-200"></div>
+                <div id="light-yellow" class="w-12 h-12 rounded-full bg-yellow-900 border-2 border-yellow-950 transition-colors duration-200"></div>
+                <div id="light-green" class="w-12 h-12 rounded-full bg-green-900 border-2 border-green-950 transition-colors duration-200"></div>
             </div>
 
-            <div class="flex items-center bg-zinc-800/50 p-4 rounded-xl border-l-4 border-orange-500">
-                <span class="text-3xl mr-4">⏰</span>
-                <div>
-                    <h4 class="font-bold text-orange-500 text-sm uppercase">Hora de Entrada</h4>
-                    <p class="text-gray-200 font-semibold">04:00 PM (Hora de Pits)</p>
+            <!-- Botón de Inicio de Carrera -->
+            <button id="btn-start" onclick="startRace()" class="w-full bg-gradient-to-r from-yellow-400 via-orange-500 to-red-600 hover:from-yellow-500 hover:to-red-700 text-black font-black uppercase tracking-wider py-5 px-8 rounded-2xl text-xl transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(249,115,22,0.4)] border-b-4 border-red-800 flex items-center justify-center gap-3">
+                <i class="fa-solid fa-gauge-high text-2xl animate-pulse"></i> ¡INICIAR CARRERA!
+            </button>
+            <p class="text-xs text-gray-400 mt-3 italic"><i class="fa-solid fa-volume-high"></i> Sube el volumen de tu dispositivo</p>
+        </section>
+
+
+        <!-- ================= PANTALLA 2: GALERÍA ANIMADA ================= -->
+        <section id="screen-2" class="screen screen-hidden w-full max-w-2xl flex flex-col items-center">
+            
+            <div class="text-center mb-6">
+                <span class="text-orange-500 font-bold uppercase tracking-widest text-sm">Presentando a nuestra escudería</span>
+                <h2 class="font-racing text-4xl md:text-5xl text-yellow-400 tracking-wide mt-1 drop-shadow-md">
+                    EL PILOTO ESTRELLA 🏎️⭐
+                </h2>
+                <p class="text-gray-300 font-medium max-w-md mx-auto mt-2 text-sm">
+                    ¡Conoce al corredor más rápido del circuito que hoy cumple un año más en la pista de la diversión!
+                </p>
+            </div>
+
+            <!-- Carrusel / Mosaico de Fotos Animadas del Cumpleañero -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-lg mb-8">
+                
+                <!-- Tarjeta Foto 1 (Piloto de F-1) -->
+                <div class="photo-card bg-zinc-900 border-2 border-orange-500 rounded-2xl p-4 overflow-hidden relative shadow-lg transform -rotate-1">
+                    <div class="absolute top-2 right-2 bg-red-600 text-white text-[10px] font-black px-2 py-0.5 rounded uppercase tracking-wider hw-skew z-10">
+                        Piloto Oficial
+                    </div>
+                    <!-- Reemplazar src por la imagen real del cumpleañero -->
+                    <div class="w-full h-48 bg-zinc-800 rounded-xl overflow-hidden mb-3 border border-zinc-700 flex items-center justify-center">
+                        <img src="http://googleusercontent.com/image_collection/image_retrieval/14329338639573317380_0" alt="Foto Piloto 1" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-timer text-lg text-yellow-400 font-black">FICHA TÉCNICA #1</h3>
+                    <p class="text-gray-300 text-xs mt-1"><strong>Súper Poder:</strong> Velocidad Turbo</p>
+                    <p class="text-gray-300 text-xs"><strong>Vehículo Favorito:</strong> Bone Shaker 🔥</p>
+                </div>
+
+                <!-- Tarjeta Foto 2 (Celebrando) -->
+                <div class="photo-card bg-zinc-900 border-2 border-yellow-500 rounded-2xl p-4 overflow-hidden relative shadow-lg transform rotate-2">
+                    <div class="absolute top-2 right-2 bg-yellow-500 text-black text-[10px] font-black px-2 py-0.5 rounded uppercase tracking-wider hw-skew z-10">
+                        Equipo Campeón
+                    </div>
+                    <!-- Reemplazar src por la imagen real del cumpleañero -->
+                    <div class="w-full h-48 bg-zinc-800 rounded-xl overflow-hidden mb-3 border border-zinc-700 flex items-center justify-center">
+                        <img src="http://googleusercontent.com/image_collection/image_retrieval/14329338639573317380_1" alt="Foto Piloto 2" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-timer text-lg text-yellow-400 font-black">FICHA TÉCNICA #2</h3>
+                    <p class="text-gray-300 text-xs mt-1"><strong>Pasatiempo:</strong> Retar las pistas imposibles</p>
+                    <p class="text-gray-300 text-xs"><strong>Nivel de Energía:</strong> Máximo Torque ⚡</p>
+                </div>
+
+            </div>
+
+            <!-- Botón para ver Datos Técnicos de la Fiesta -->
+            <button onclick="goToDetails()" class="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-black uppercase tracking-wider py-4 px-10 rounded-xl transition duration-300 transform hover:scale-105 active:scale-95 shadow-lg border-b-4 border-red-800 text-lg flex items-center gap-2">
+                Ver Detalles del Circuito <i class="fa-solid fa-flag-checkered"></i>
+            </button>
+        </section>
+
+
+        <!-- ================= PANTALLA 3: DETALLES DEL EVENTO ================= -->
+        <section id="screen-3" class="screen screen-hidden w-full max-w-xl flex flex-col items-center">
+            
+            <div class="text-center mb-6 transform -rotate-1">
+                <span class="text-yellow-400 font-bold uppercase tracking-widest text-xs">¡Línea de Meta!</span>
+                <h2 class="font-racing text-4xl text-transparent bg-clip-text bg-gradient-to-b from-yellow-300 to-orange-500">
+                    DETALLES DE LA PISTA
+                </h2>
+            </div>
+
+            <!-- CONTADOR REGRESIVO -->
+            <div class="bg-zinc-900/90 border-2 border-orange-500 rounded-2xl p-5 w-full shadow-[0_0_15px_rgba(249,115,22,0.2)] mb-6 text-center">
+                <h3 class="text-orange-500 font-bold uppercase tracking-wider text-xs mb-3">⏱️ Tiempo restante para la carrera</h3>
+                <div class="grid grid-cols-4 gap-2 font-timer text-xl md:text-2xl text-yellow-400">
+                    <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-800">
+                        <span id="days">00</span>
+                        <p class="text-[9px] font-sans uppercase tracking-normal text-gray-500 mt-1">Días</p>
+                    </div>
+                    <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-800">
+                        <span id="hours">00</span>
+                        <p class="text-[9px] font-sans uppercase tracking-normal text-gray-500 mt-1">Horas</p>
+                    </div>
+                    <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-800">
+                        <span id="minutes">00</span>
+                        <p class="text-[9px] font-sans uppercase tracking-normal text-gray-500 mt-1">Min</p>
+                    </div>
+                    <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-800">
+                        <span id="seconds">00</span>
+                        <p class="text-[9px] font-sans uppercase tracking-normal text-gray-500 mt-1">Seg</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="flex items-center bg-zinc-800/50 p-4 rounded-xl border-l-4 border-red-500">
-                <span class="text-3xl mr-4">📍</span>
-                <div class="flex-grow">
-                    <h4 class="font-bold text-red-500 text-sm uppercase">Pista de Carreras (Lugar)</h4>
-                    <p class="text-gray-200 font-semibold mb-2">Salón de Eventos "Speedway", Calle Ficticia #123</p>
-                    <a href="https://maps.google.com" target="_blank" class="inline-block bg-zinc-700 hover:bg-zinc-600 text-xs font-bold px-3 py-1.5 rounded-md transition text-white">
-                        🗺️ Ver en Google Maps
-                    </a>
+            <!-- TARJETAS DE DATOS DE LA FIESTA -->
+            <div class="w-full space-y-3 mb-6">
+                <!-- Fecha -->
+                <div class="flex items-center bg-zinc-900/70 p-4 rounded-xl border-l-4 border-yellow-500">
+                    <span class="text-2xl mr-4">📅</span>
+                    <div>
+                        <h4 class="font-bold text-yellow-500 text-xs uppercase tracking-wider">Fecha de Salida</h4>
+                        <p class="text-gray-200 text-sm font-semibold">Sábado, 15 de Agosto de 2026</p>
+                    </div>
+                </div>
+
+                <!-- Hora -->
+                <div class="flex items-center bg-zinc-900/70 p-4 rounded-xl border-l-4 border-orange-500">
+                    <span class="text-2xl mr-4">⏰</span>
+                    <div>
+                        <h4 class="font-bold text-orange-500 text-xs uppercase tracking-wider">Llamado a Pits (Hora)</h4>
+                        <p class="text-gray-200 text-sm font-semibold">04:00 PM (Hora de Pits)</p>
+                    </div>
+                </div>
+
+                <!-- Lugar -->
+                <div class="flex items-center bg-zinc-900/70 p-4 rounded-xl border-l-4 border-red-500">
+                    <span class="text-2xl mr-4">📍</span>
+                    <div class="flex-grow">
+                        <h4 class="font-bold text-red-500 text-xs uppercase tracking-wider">Pista (Lugar)</h4>
+                        <p class="text-gray-200 text-sm font-semibold mb-2">Salón de Eventos "Speedway", Calle Ficticia #123</p>
+                        <a href="https://maps.google.com" target="_blank" class="inline-flex items-center gap-1.5 bg-zinc-800 hover:bg-zinc-700 text-[11px] font-bold px-3 py-1.5 rounded-md transition text-white">
+                            <i class="fa-solid fa-map-location-dot text-yellow-500"></i> Ver en Google Maps
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="w-full">
-            <a id="btn-wsp" href="#" target="_blank" class="block w-full bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-black uppercase tracking-wider py-4 rounded-xl shadow-[0_4px_15px_rgba(239,68,68,0.4)] transition transform hover:-translate-y-1 active:translate-y-0 text-center text-lg border-b-4 border-red-800">
-                🔥 Confirmar Asistencia vía WhatsApp
-            </a>
-            <p class="text-xs text-gray-400 mt-2">Por favor confirma antes del 10 de Agosto para asegurar tu lugar en la parrilla.</p>
-        </div>
+            <!-- ACCIÓN Y REGRESO -->
+            <div class="w-full space-y-3">
+                <a id="btn-wsp" href="#" target="_blank" class="block w-full bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-black uppercase tracking-wider py-4 rounded-xl shadow-[0_4px_15px_rgba(239,68,68,0.4)] transition duration-300 transform hover:scale-[1.02] text-center text-md border-b-4 border-red-800 flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-xl"></i> Confirmar Asistencia vía WhatsApp
+                </a>
+                <p class="text-[11px] text-gray-400 text-center">Favor de confirmar antes del 10 de Agosto.</p>
 
-    </main>
+                <!-- Botón Volver a Fotos -->
+                <button onclick="backToPhotos()" class="w-full text-center text-xs text-gray-400 hover:text-white transition duration-200 underline mt-2 flex items-center justify-center gap-1">
+                    <i class="fa-solid fa-arrow-left"></i> Volver a ver las fotos
+                </button>
+            </div>
+        </section>
 
-    <div class="h-4 bg-white w-full mt-auto" style="background-image: linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000), linear-gradient(45deg, #000 25%, #fff 25%, #fff 75%, #000 75%, #000); background-size: 20px 20px; background-position: 0 0, 10px 10px;"></div>
+    </div>
 
+    <!-- PIE DE PISTA (Bandera de cuadros inferior) -->
+    <div class="h-5 checkered-pattern w-full border-t-2 border-orange-500 shadow-md"></div>
+
+    <!-- AUDIO SINTETIZADO & CONTROLADOR DE NAVEGACIÓN -->
     <script>
-        // --- 1. CONFIGURACIÓN DEL EVENTO (Modifica esto) ---
+        // --- 1. CONFIGURACIÓN PERSONALIZABLE DEL EVENTO ---
         const FECHA_EVENTO = new Date("August 15, 2026 16:00:00").getTime();
-        const TELEFONO_WHATSAPP = "573000000000"; // Tu número con código de país (sin el +)
-        const NOMBRE_HIJO = "Christopher"; // Nombre del cumpleañero
-        
-        // --- 2. CONFIGURACIÓN DEL BOTÓN DE WHATSAPP ---
-        const mensajeWsp = encodeURIComponent(`¡Hola! Confirmo mi asistencia al Gran Premio de cumpleaños de ${NOMBRE_HIJO}. 🏎️💨 ¡Allí estaremos!`);
+        const TELEFONO_WHATSAPP = "573000000000"; // Reemplaza por tu teléfono (sin el +)
+        const NOMBRE_HIJO = "Christopher"; // El nombre de tu hijo
+        const EDAD_HIJO = "2"; // Edad que cumple tu hijo
+
+        // Configuración automática del enlace de WhatsApp
+        const mensajeWsp = encodeURIComponent(`¡Hola! Confirmo mi asistencia al Gran Premio de cumpleaños de ${NOMBRE_HIJO} (Nº ${EDAD_HIJO}). 🏎️💨 ¡Allí estaremos con el tanque lleno de energía!`);
         document.getElementById("btn-wsp").href = `https://wa.me/${TELEFONO_WHATSAPP}?text=${mensajeWsp}`;
 
-        // --- 3. LÓGICA DEL CONTADOR REGRESIVO ---
+        // --- 2. SINTETIZADOR DE SONIDO (Web Audio API) ---
+        // Genera efectos de audio de carreras sin necesidad de archivos de sonido externos.
+        let audioCtx;
+        function getAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            return audioCtx;
+        }
+
+        // Sonido de Pitido del Semáforo
+        function playBeep(frequency, duration) {
+            try {
+                const ctx = getAudioContext();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                
+                osc.type = "sine";
+                osc.frequency.setValueAtTime(frequency, ctx.currentTime);
+                
+                gain.gain.setValueAtTime(0.15, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + duration);
+                
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                
+                osc.start();
+                osc.stop(ctx.currentTime + duration);
+            } catch (e) {
+                console.log("Audio fallido o bloqueado por navegador", e);
+            }
+        }
+
+        // Efecto del Rugido de Motor y Derrape (Tire Screech)
+        function playEngineSound() {
+            try {
+                const ctx = getAudioContext();
+                const now = ctx.currentTime;
+                
+                // Generar sonido del Motor de Carrera
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = "sawtooth";
+                osc.frequency.setValueAtTime(60, now);
+                // Aceleración rápida
+                osc.frequency.exponentialRampToValueAtTime(450, now + 1.2);
+                
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 1.5);
+                
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(now + 1.5);
+
+                // Generar sonido de Derrape (Ruido blanco de alta frecuencia)
+                setTimeout(() => {
+                    const noiseOsc = ctx.createOscillator();
+                    const noiseGain = ctx.createGain();
+                    noiseOsc.type = "triangle";
+                    noiseOsc.frequency.setValueAtTime(900, ctx.currentTime);
+                    noiseOsc.frequency.linearRampToValueAtTime(600, ctx.currentTime + 0.6);
+                    
+                    noiseGain.gain.setValueAtTime(0.1, ctx.currentTime);
+                    noiseGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.6);
+                    
+                    noiseOsc.connect(noiseGain);
+                    noiseGain.connect(ctx.destination);
+                    noiseOsc.start();
+                    noiseOsc.stop(ctx.currentTime + 0.6);
+                }, 800);
+            } catch (e) {
+                console.log("Audio fallido o bloqueado", e);
+            }
+        }
+
+        // --- 3. LÓGICA DE TRANSICIONES ---
+        
+        // Pantalla 1 -> Pantalla 2 (Efecto semáforo con sonido)
+        function startRace() {
+            // Inicializar Audio Context (requiere acción directa del usuario)
+            getAudioContext();
+
+            const lightRed = document.getElementById("light-red");
+            const lightYellow = document.getElementById("light-yellow");
+            const lightGreen = document.getElementById("light-green");
+            const btnStart = document.getElementById("btn-start");
+
+            btnStart.disabled = true;
+
+            // Secuencia de semáforo
+            // 1. Luz Roja
+            setTimeout(() => {
+                lightRed.style.backgroundColor = "#ef4444";
+                lightRed.style.boxShadow = "0 0 15px #ef4444";
+                playBeep(440, 0.25);
+            }, 100);
+
+            // 2. Luz Amarilla
+            setTimeout(() => {
+                lightYellow.style.backgroundColor = "#eab308";
+                lightYellow.style.boxShadow = "0 0 15px #eab308";
+                playBeep(440, 0.25);
+            }, 800);
+
+            // 3. Luz Verde e Inicio del Motor
+            setTimeout(() => {
+                lightGreen.style.backgroundColor = "#22c55e";
+                lightGreen.style.boxShadow = "0 0 15px #22c55e";
+                playBeep(880, 0.4);
+                playEngineSound();
+            }, 1500);
+
+            // Transición a la Pantalla de Fotos
+            setTimeout(() => {
+                document.getElementById("screen-1").classList.add("screen-hidden");
+                document.getElementById("screen-2").classList.remove("screen-hidden");
+            }, 2100);
+        }
+
+        // Pantalla 2 -> Pantalla 3
+        function goToDetails() {
+            playBeep(600, 0.15);
+            document.getElementById("screen-2").classList.add("screen-hidden");
+            document.getElementById("screen-3").classList.remove("screen-hidden");
+        }
+
+        // Pantalla 3 -> Pantalla 2 (Atrás)
+        function backToPhotos() {
+            playBeep(300, 0.1);
+            document.getElementById("screen-3").classList.add("screen-hidden");
+            document.getElementById("screen-2").classList.remove("screen-hidden");
+        }
+
+        // --- 4. LÓGICA DE CUENTA REGRESIVA ---
         const countdown = setInterval(function() {
             const ahora = new Date().getTime();
             const distancia = FECHA_EVENTO - ahora;
 
-            // Cálculos de tiempo
+            // Cálculos
             const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
             const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
             const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
 
-            // Renderizar en pantalla con formato de dos dígitos
+            // Renderizar
             document.getElementById("days").innerText = dias.toString().padStart(2, '0');
             document.getElementById("hours").innerText = horas.toString().padStart(2, '0');
             document.getElementById("minutes").innerText = minutos.toString().padStart(2, '0');
             document.getElementById("seconds").innerText = segundos.toString().padStart(2, '0');
 
-            // Si la cuenta regresiva termina
+            // Si la carrera ya pasó o empezó
             if (distancia < 0) {
                 clearInterval(countdown);
                 document.getElementById("days").innerText = "00";
                 document.getElementById("hours").innerText = "00";
                 document.getElementById("minutes").innerText = "00";
                 document.getElementById("seconds").innerText = "00";
-                document.querySelector(".pulse-orange").innerText = "🏁 ¡LA CARRERA HA COMENZADO! 🏁";
             }
         }, 1000);
     </script>
