@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Gran Premio de Cumpleaños! 🏎️🔥</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Orbitron:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        .font-racing { font-family: 'Permanent Marker', cursive; }
+        .font-timer { font-family: 'Orbitron', sans-serif; }
+        body { font-family: 'Montserrat', sans-serif; }
+        
+        /* Animación de luces de carrera */
+        @keyframes pulse-fast {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        .pulse-orange { animation: pulse-fast 1.5s infinite; }
+    </style>
+</head>
+<body class="bg-zinc-900 text-white min-h-screen flex flex-col justify-between overflow-x-hidden">
+
+    <div class="h-4 bg-white w-full" style="background-image: linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000), linear-gradient(45deg, #000 25%, #fff 25%, #fff 75%, #000 75%, #000); background-size: 20px 20px; background-position: 0 0, 10px 10px;"></div>
+
+    <main class="container mx-auto px-4 py-8 max-w-xl text-center flex-grow flex flex-col justify-center items-center">
+        
+        <div class="mb-6 transform -rotate-2">
+            <span class="block text-amber-400 text-2xl font-bold uppercase tracking-widest drop-shadow-md">¡Estás invitado al!</span>
+            <h1 class="font-racing text-5xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-b from-yellow-400 via-orange-500 to-red-600 drop-shadow-[0_4px_8px_rgba(239,68,68,0.6)] py-2">
+                GRAN PREMIO
+            </h1>
+            <p class="text-3xl font-black italic text-white bg-red-600 inline-block px-6 py-1 rounded-lg shadow-lg uppercase tracking-wider mt-2 border-2 border-yellow-400">
+                ¡Cumpleaños Nº 2! 🎉
+            </p>
+        </div>
+
+        <p class="text-gray-300 text-lg mb-8 max-w-sm font-medium">
+            Enciende tus motores y prepárate para la carrera más divertida del año. ¡No te quedes en los pits!
+        </p>
+
+        <div class="bg-zinc-800/90 border-2 border-orange-500 rounded-2xl p-6 w-full shadow-[0_0_20px_rgba(249,115,22,0.3)] mb-8">
+            <h3 class="text-orange-500 font-bold uppercase tracking-wider text-sm mb-3 pulse-orange">⏱️ Tiempo para el banderazo de salida</h3>
+            <div class="grid grid-cols-4 gap-2 font-timer text-2xl md:text-3xl text-yellow-400">
+                <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-700">
+                    <span id="days">00</span>
+                    <p class="text-[10px] font-sans uppercase tracking-normal text-gray-400 mt-1">Días</p>
+                </div>
+                <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-700">
+                    <span id="hours">00</span>
+                    <p class="text-[10px] font-sans uppercase tracking-normal text-gray-400 mt-1">Horas</p>
+                </div>
+                <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-700">
+                    <span id="minutes">00</span>
+                    <p class="text-[10px] font-sans uppercase tracking-normal text-gray-400 mt-1">Min</p>
+                </div>
+                <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-700">
+                    <span id="seconds">00</span>
+                    <p class="text-[10px] font-sans uppercase tracking-normal text-gray-400 mt-1">Seg</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full space-y-4 mb-8 text-left">
+            <div class="flex items-center bg-zinc-800/50 p-4 rounded-xl border-l-4 border-yellow-500">
+                <span class="text-3xl mr-4">📅</span>
+                <div>
+                    <h4 class="font-bold text-yellow-500 text-sm uppercase">Fecha del Evento</h4>
+                    <p class="text-gray-200 font-semibold">Sábado, 15 de Agosto de 2026</p>
+                </div>
+            </div>
+
+            <div class="flex items-center bg-zinc-800/50 p-4 rounded-xl border-l-4 border-orange-500">
+                <span class="text-3xl mr-4">⏰</span>
+                <div>
+                    <h4 class="font-bold text-orange-500 text-sm uppercase">Hora de Entrada</h4>
+                    <p class="text-gray-200 font-semibold">04:00 PM (Hora de Pits)</p>
+                </div>
+            </div>
+
+            <div class="flex items-center bg-zinc-800/50 p-4 rounded-xl border-l-4 border-red-500">
+                <span class="text-3xl mr-4">📍</span>
+                <div class="flex-grow">
+                    <h4 class="font-bold text-red-500 text-sm uppercase">Pista de Carreras (Lugar)</h4>
+                    <p class="text-gray-200 font-semibold mb-2">Salón de Eventos "Speedway", Calle Ficticia #123</p>
+                    <a href="https://maps.google.com" target="_blank" class="inline-block bg-zinc-700 hover:bg-zinc-600 text-xs font-bold px-3 py-1.5 rounded-md transition text-white">
+                        🗺️ Ver en Google Maps
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full">
+            <a id="btn-wsp" href="#" target="_blank" class="block w-full bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-black uppercase tracking-wider py-4 rounded-xl shadow-[0_4px_15px_rgba(239,68,68,0.4)] transition transform hover:-translate-y-1 active:translate-y-0 text-center text-lg border-b-4 border-red-800">
+                🔥 Confirmar Asistencia vía WhatsApp
+            </a>
+            <p class="text-xs text-gray-400 mt-2">Por favor confirma antes del 10 de Agosto para asegurar tu lugar en la parrilla.</p>
+        </div>
+
+    </main>
+
+    <div class="h-4 bg-white w-full mt-auto" style="background-image: linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000), linear-gradient(45deg, #000 25%, #fff 25%, #fff 75%, #000 75%, #000); background-size: 20px 20px; background-position: 0 0, 10px 10px;"></div>
+
+    <script>
+        // --- 1. CONFIGURACIÓN DEL EVENTO (Modifica esto) ---
+        const FECHA_EVENTO = new Date("August 15, 2026 16:00:00").getTime();
+        const TELEFONO_WHATSAPP = "573000000000"; // Tu número con código de país (sin el +)
+        const NOMBRE_HIJO = "Christopher"; // Nombre del cumpleañero
+        
+        // --- 2. CONFIGURACIÓN DEL BOTÓN DE WHATSAPP ---
+        const mensajeWsp = encodeURIComponent(`¡Hola! Confirmo mi asistencia al Gran Premio de cumpleaños de ${NOMBRE_HIJO}. 🏎️💨 ¡Allí estaremos!`);
+        document.getElementById("btn-wsp").href = `https://wa.me/${TELEFONO_WHATSAPP}?text=${mensajeWsp}`;
+
+        // --- 3. LÓGICA DEL CONTADOR REGRESIVO ---
+        const countdown = setInterval(function() {
+            const ahora = new Date().getTime();
+            const distancia = FECHA_EVENTO - ahora;
+
+            // Cálculos de tiempo
+            const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
+
+            // Renderizar en pantalla con formato de dos dígitos
+            document.getElementById("days").innerText = dias.toString().padStart(2, '0');
+            document.getElementById("hours").innerText = horas.toString().padStart(2, '0');
+            document.getElementById("minutes").innerText = minutos.toString().padStart(2, '0');
+            document.getElementById("seconds").innerText = segundos.toString().padStart(2, '0');
+
+            // Si la cuenta regresiva termina
+            if (distancia < 0) {
+                clearInterval(countdown);
+                document.getElementById("days").innerText = "00";
+                document.getElementById("hours").innerText = "00";
+                document.getElementById("minutes").innerText = "00";
+                document.getElementById("seconds").innerText = "00";
+                document.querySelector(".pulse-orange").innerText = "🏁 ¡LA CARRERA HA COMENZADO! 🏁";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
